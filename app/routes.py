@@ -16,7 +16,7 @@ def index():
     return render_template('index.html', title="Course List", classes = allclasses)
 
 @app.route('/createclass/', methods=['GET',"POST"])
-def craeteclass():
+def createclass():
     cform = ClassForm()
 
     return render_template('create_class.html', form =cform)
