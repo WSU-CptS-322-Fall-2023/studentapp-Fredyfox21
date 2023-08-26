@@ -15,8 +15,8 @@ def index():
     allclasses = Class.query.order_by(Class.major).all()
     return render_template('index.html', title="Course List", classes = allclasses)
 
-@app.route('/createclass/', methods=['GET',"POST"])
+@app.route('/createclass/', methods=['GET','POST'])
 def createclass():
-    cform = ClassForm()
+    form = ClassForm()
 
-    return render_template('create_class.html', form =cform)
+    return render_template('create_class.html', form =form)
