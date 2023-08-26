@@ -17,6 +17,11 @@ def index():
 
 @app.route('/createclass/', methods=['GET','POST'])
 def createclass():
-    form = ClassForm()
-
-    return render_template('create_class.html', form =form)
+    cform = ClassForm()
+    if cform.validate_on_submit():
+        newClass = Class(coursenum = cform.coursenum.data, title = cform.title.data, major = cform.major.data.name )
+        db.session.add(newClass)
+        db.session.commit()
+        flash('Class"' + newClass.major + '-' + newClass.coursenum + '" is created')
+        return redirect(url_for('index'))
+    return render_template('create_class.html', form =cform)

@@ -7,21 +7,21 @@
             {{ form.hidden_tag() }}
 
                 <p> {{ form.major.label }} </p>
-                <p>{{ form.major }}</p>
+                <p>{{ form.major(class ='textinput') }}</p>
 
                 {% for error in form.major.errors %}
                     <span style="color: red">[{{ error}}]</span>
                 {% endfor %}
 
                 <p>{{ form.coursenum.label }}</p>
-                <p>{{ form.coursenum }}</p>
+                <p>{{ form.coursenum(class ='textinput') }}</p>
 
                 {% for error in form.coursenum.errors %}
                     <span style="color: red">[{{ error}}]</span>
                 {% endfor %}
 
                 <p>{{ form.title.label }}</p>
-                <p>{{ form.title }}</p>
+                <p>{{ form.title(class ='textinput') }}</p>
 
                 {% for error in form.title.errors %}
                     <span style="color: red">[{{ error}}]</span>
@@ -30,6 +30,6 @@
             <p> {{ form.submit(class='button') }}</p>
 
         </form>
-    {% end if %}
+    {% endif %}
 
 {% endblock %}
