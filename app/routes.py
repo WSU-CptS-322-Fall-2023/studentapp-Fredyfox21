@@ -8,6 +8,15 @@ from app.models import Class, Major
 def initDB(*args, **kwargs):
     if app.got_first_request:
         db.create_all()
+        if Major.query.count()==0:
+            majors=[{'name':'CptS','department':'School of EECS'},
+                    {'name':'SE','department':'School of EECS'},
+                    {'name':'EE','department':'School of EECS'},
+                    {'name':'ME','department':'Mechanical Engineering'},
+                    {'name':'MATH','department':'Mathematics'}, ]
+            for t in majors:
+                db.session.add(Major(name=t['name'],department=t['department']))
+            db.session.commit()
 
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
