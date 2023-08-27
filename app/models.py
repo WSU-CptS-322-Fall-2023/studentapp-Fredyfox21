@@ -1,8 +1,13 @@
 from enum import unique
-from app import db
+from app import db, login
 from datetime import datetime
-from werkzeug.security import generate_password_hash,check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
+@login.user_loader
+def load_user(id):
+    return Student.query.get(int(id))
+#   return Student.query.filter_by(id=sid).first()
 
 class Class(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,7 +27,7 @@ class Major(db.Model):
     def __repr__(self):
         return '<Major  name: {} - department: {}>'.format(self.name,self.department)
     
-class Student(db.Model):
+class Student(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key= True)
     username = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))

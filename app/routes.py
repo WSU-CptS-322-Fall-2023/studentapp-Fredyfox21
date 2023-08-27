@@ -1,8 +1,9 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app,db
 
-from app.forms import ClassForm, RegistrationForm
+from app.forms import ClassForm, RegistrationForm, LoginForm
 from app.models import Class, Major, Student
+from flask_login import login_user, current_user, logout_user
 
 @app.before_request
 def initDB(*args, **kwargs):
@@ -46,3 +47,23 @@ def registerclass():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('index'))
     return render_template('register.html', form =rform)
+
+@app.route('/login', methods =['GET','POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    lform =LoginForm()
+    if lform.validate_on_submit():
+        student = Student.query.filter_by(username= lform.username.data).first()
+        #if login fails#
+        if (student is None) or (student.check_password(lform.password.data)==False):
+            flash('Invalid username or password.')
+            return redirect(url_for('login'))
+        login_user(student, remember = lform.remember_me.data)
+        return redirect(url_for('index'))
+    return render_template('login.html', title ='Sign In', form = lform)
+
+@app.route('/logout', methods =['GET'])
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
