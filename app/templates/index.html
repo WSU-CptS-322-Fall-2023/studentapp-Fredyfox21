@@ -2,12 +2,7 @@
 
 
 {% block content %}
-    <h1>Hi, {% if current_user.is_anonymous %}
-        
-    {% else %}
-        <td><a href="{{ url_for('logout') }}" class = "button">Logout</a></td>
-    {% endif %}!
-    </h1>
+    <h1>Hi, {{current_user.firstname}} {{current_user.lastname}} </h1>
 
     {% for class in classes %}
         {% include '_class.html' %}

@@ -3,7 +3,8 @@ from app import app,db
 
 from app.forms import ClassForm, RegistrationForm, LoginForm
 from app.models import Class, Major, Student
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
+from datetime import datetime
 
 @app.before_request
 def initDB(*args, **kwargs):
@@ -21,11 +22,13 @@ def initDB(*args, **kwargs):
 
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
+@login_required
 def index():
     allclasses = Class.query.order_by(Class.major).all()
     return render_template('index.html', title="Course List", classes = allclasses)
 
 @app.route('/createclass/', methods=['GET','POST'])
+@login_required
 def createclass():
     cform = ClassForm()
     if cform.validate_on_submit():
@@ -48,6 +51,14 @@ def registerclass():
         return redirect(url_for('index'))
     return render_template('register.html', form =rform)
 
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen= datetime.utcnow()
+        db.session.add(current_user)
+        db.session.commit()
+
+
 @app.route('/login', methods =['GET','POST'])
 def login():
     if current_user.is_authenticated:
@@ -64,6 +75,7 @@ def login():
     return render_template('login.html', title ='Sign In', form = lform)
 
 @app.route('/logout', methods =['GET'])
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
