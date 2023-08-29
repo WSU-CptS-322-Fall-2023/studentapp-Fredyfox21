@@ -3,6 +3,7 @@ from wtforms import StringField, SubmitField, TextAreaField, PasswordField, Bool
 from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import  ValidationError, Length, DataRequired, Email, EqualTo
 from app.models import Class, Major, Student
+from flask_login import current_user
 
 def get_major():
     return Major.query.all()
@@ -43,6 +44,22 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+
+class EditForm(FlaskForm):
+    firstname = StringField('First Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    address = TextAreaField('Address', [Length(min=0,max=200)])
+    password = PasswordField("Password", validators= [DataRequired()])
+    password2 = PasswordField("Repeat Password", validators= [DataRequired(), EqualTo('password')])
+    submit = SubmitField('Submit')
+
+    def validate_email(self, email):
+        students = Student.query.filter_by(email=email.data).all()
+        for student in students:
+            if(student.id!= current_user.id):
+                raise ValidationError('the email is already associated with another account! Please use a different email address.')
+            
     
 
 
