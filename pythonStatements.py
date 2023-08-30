@@ -1,11 +1,7 @@
-
-
 from app import db
+from app.models import Student, Class, Major, enrolled
 #create the database file, if it doesn't exist. 
 db.create_all()
-
-#import Major model
-from app.models import Major
 
 # Create a major
 newMajor = Major(name='CptS',department='school of EECS')
