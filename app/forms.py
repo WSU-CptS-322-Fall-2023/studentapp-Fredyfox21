@@ -61,8 +61,8 @@ class EditForm(FlaskForm):
                 raise ValidationError('the email is already associated with another account! Please use a different email address.')
             
     
-class EmptyForm(FlaskForm):
-    submit = SubmitField('Submit')
+#class EmptyForm(FlaskForm):
+#   submit = SubmitField('Submit')
 
 
 
