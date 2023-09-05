@@ -39,7 +39,7 @@ def createclass():
         return redirect(url_for('index'))
     return render_template('create_class.html', form =cform)
 
-@app.route('/register/', methods=['GET','POST'])
+@app.route('/registerclass/', methods=['GET','POST'])
 def registerclass():
     rform = RegistrationForm()
     if rform.validate_on_submit():
