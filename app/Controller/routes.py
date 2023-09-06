@@ -16,7 +16,7 @@ def index():
     allclasses = Class.query.order_by(Class.major).all()
     return render_template('index.html', title="Course List", classes = allclasses)
 
-@routes_blueprint.route('/createclass/', methods=['GET','POST'])
+@routes_blueprint.route('/createclass', methods=['GET','POST'])
 @login_required
 def createclass():
     cform = ClassForm()

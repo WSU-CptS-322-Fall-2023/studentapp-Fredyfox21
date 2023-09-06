@@ -9,7 +9,7 @@ from config import Config
 auth_blueprint = Blueprint('auth', __name__)
 auth_blueprint.template_folder = Config.TEMPLATE_FOLDER
 
-@auth_blueprint.route('/register/', methods=['GET','POST'])
+@auth_blueprint.route('/register', methods=['GET','POST'])
 def register():
     rform = RegistrationForm()
     if rform.validate_on_submit():
