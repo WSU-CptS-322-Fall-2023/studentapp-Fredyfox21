@@ -9,6 +9,9 @@
                 {{wtf.quick_form(form,action=url_for('login'))}}
             </div>
         </div>
+
     {% endif %}
+    <br>
+    <p>New User? <a href="{{url_for(registerclass) }}">Click to Register!</a></p>
 
 {% endblock %}

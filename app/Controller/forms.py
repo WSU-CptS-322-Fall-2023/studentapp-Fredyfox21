@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, PasswordField, BooleanField
 from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import  ValidationError, Length, DataRequired, Email, EqualTo
-from app.models import Class, Major, Student
+from app.Model.models import Class, Major, Student
 from flask_login import current_user
 
 def get_major():
