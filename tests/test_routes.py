@@ -25,7 +25,7 @@ def test_client():
     # create the flask application ; configure the app for tests
     flask_app = create_app(config_class=TestConfig)
 
-    db.init_app(flask_app)
+#    db.init_app(flask_app)
     # Flask provides a way to test your application by exposing the Werkzeug test Client
     # and handling the context locals for you.
     testing_client = flask_app.test_client()

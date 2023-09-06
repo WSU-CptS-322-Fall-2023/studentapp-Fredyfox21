@@ -1,5 +1,5 @@
 from app import db
-from app.Model.models import Student, Class, Major, enrolled
+from app.Model.models import Class, Major
 #create the database file, if it doesn't exist. 
 db.create_all()
 

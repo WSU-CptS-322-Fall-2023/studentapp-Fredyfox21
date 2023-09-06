@@ -9,5 +9,5 @@ Werkzeug==2.3.7
 WTForms==2.3.3
 WTForms-SQLAlchemy==0.2
 email-validator==1.1.2
-pytest==7.1.2
+pytest==7.4.0
 python-dotenv==0.20.0
