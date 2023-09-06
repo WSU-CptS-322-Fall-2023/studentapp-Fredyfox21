@@ -1,8 +1,11 @@
-from app import app,db
+from app import create_app,db
 
 from app.Model.models import Major
 from flask_login import current_user
 from datetime import datetime
+from config import Config
+
+app = create_app(Config)
 
 @app.before_request
 def initDB(*args, **kwargs):

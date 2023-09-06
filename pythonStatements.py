@@ -1,5 +1,5 @@
 from app import db
-from app.models import Student, Class, Major, enrolled
+from app.Model.models import Student, Class, Major, enrolled
 #create the database file, if it doesn't exist. 
 db.create_all()
 
@@ -14,7 +14,7 @@ for m in Major.query.all():
     print(m)
 
 #Create a class; assign class's major to the major we just created
-from app.models import Class
+from app.Model.models import Class
 newClass = Class(coursenum='322',major='CptS',title='Software Engineering')
 db.session.add(newClass)
 newClass = Class(coursenum='315',major='CE',title='Fluid Mechanics')
